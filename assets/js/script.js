@@ -109,17 +109,38 @@ var VoiceRSS = {
   },
 };
 
-function test() {
-  VoiceRSS.speech({
-    key: "3c099b59f35542a38890404cc58b3ab0",
-    src: "Hello, world!",
-    hl: "en-us",
-    v: "Linda",
-    r: 0,
-    c: "mp3",
-    f: "44khz_16bit_stereo",
-    ssml: false,
-  });
+// function test() {
+//   VoiceRSS.speech({
+//     key: "3c099b59f35542a38890404cc58b3ab0",
+//     src: "Hello, world!",
+//     hl: "en-us",
+//     v: "Linda",
+//     r: 0,
+//     c: "mp3",
+//     f: "44khz_16bit_stereo",
+//     ssml: false,
+//   });
+// }
+
+// test();
+
+// Get Jokes from Joke API
+async function getJokes() {
+  let joke = "";
+  const apiUrl = "https://v2.jokeapi.dev/joke/Programming";
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    // console.log(data);
+    if (data.type === "twopart") {
+      joke = `${data.setup}...${data.delivery}`;
+      console.log(joke);
+    } else {
+      console.log(data.joke);
+    }
+  } catch (error) {
+    console.log("Whpoos", error);
+  }
 }
 
-test();
+getJokes();
